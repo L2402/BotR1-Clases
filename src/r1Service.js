@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function sendPromptToR1({ systemPrompt, userPrompt }) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
-  const model = process.env.MODEL || 'deepseek-chat';
+  const model = process.env.MODEL || 'deepseek-reasoner';
 
   if (!apiKey) {
     const error = new Error('Falta la variable DEEPSEEK_API_KEY en el archivo .env.');
@@ -19,7 +19,7 @@ async function sendPromptToR1({ systemPrompt, userPrompt }) {
   messages.push({ role: 'user', content: userPrompt });
 
   const response = await axios.post(
-    'https://api.deepseek.com/chat/completions',
+    'https://openrouter.ai/api/v1/chat/completions',
     {
       model,
       messages,
@@ -28,7 +28,8 @@ async function sendPromptToR1({ systemPrompt, userPrompt }) {
     {
       headers: {
         Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'http://localhost:3000'
       }
     }
   );
@@ -42,6 +43,23 @@ async function sendPromptToR1({ systemPrompt, userPrompt }) {
   };
 }
 
+function mapAxiosError(error) {
+  const statusCode = error.response?.status || 500;
+  const providerMessage = error.response?.data?.error?.message;
+  const message = providerMessage || error.message || 'Error inesperado al procesar la consulta.';
+  const mapped = new Error(message);
+  mapped.statusCode = statusCode;
+  return mapped;
+}
+
+async function sendPromptToR1Safe(payload) {
+  try {
+    return await sendPromptToR1(payload);
+  } catch (error) {
+    throw mapAxiosError(error);
+  }
+}
+
 module.exports = {
-  sendPromptToR1
+  sendPromptToR1: sendPromptToR1Safe
 };

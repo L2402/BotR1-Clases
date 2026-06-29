@@ -44,7 +44,7 @@ copy .env.example .env
 
 - `DEEPSEEK_API_KEY`: clave de acceso a DeepSeek.
 - `PORT`: puerto del servidor, por defecto `3000`.
-- `MODEL`: modelo que consumirá la API, por defecto `deepseek-chat`.
+- `MODEL`: modelo que consumirá la API, por defecto `deepseek-reasoner`.
 
 ## Ejecución
 
@@ -85,7 +85,7 @@ Respuesta esperada:
 
 ```json
 {
-  "model": "deepseek-chat",
+  "model": "deepseek-reasoner",
   "reply": "...",
   "raw": {}
 }
