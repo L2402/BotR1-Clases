@@ -1,6 +1,6 @@
 # BotR1 Node.js - Práctica de dependencias y seguridad
 
-Proyecto en Node.js/Express que expone una API para enviar prompts a OpenAI. La práctica está pensada para demostrar gestión de dependencias con `npm`, detección de vulnerabilidades con `npm audit`, corrección de hallazgos y pruebas funcionales con Postman.
+Proyecto en Node.js/Express que expone una API para enviar prompts a DeepSeek. La práctica está pensada para demostrar gestión de dependencias con `npm`, detección de vulnerabilidades con `npm audit`, corrección de hallazgos y pruebas funcionales con Postman.
 
 ## ¿De qué trata este proyecto?
 
@@ -20,7 +20,7 @@ En otras palabras, sirve como ejemplo para aprender cómo se organiza una aplica
 
 - Node.js 18 o superior.
 - npm.
-- Cuenta y clave de OpenAI.
+- Cuenta y clave de DeepSeek.
 - Postman para las pruebas manuales.
 
 ## Instalación
@@ -38,14 +38,13 @@ npm install
 copy .env.example .env
 ```
 
-4. Coloca tu clave de OpenAI en `OPENAI_API_KEY`.
+4. Coloca tu clave de DeepSeek en `DEEPSEEK_API_KEY`.
 
 ## Variables de entorno
 
-- `OPENAI_API_KEY`: clave de acceso a OpenAI.
-- `OPENAI_ORG_ID`: identificador opcional de tu organización de OpenAI.
+- `DEEPSEEK_API_KEY`: clave de acceso a DeepSeek.
 - `PORT`: puerto del servidor, por defecto `3000`.
-- `MODEL`: modelo que consumirá la API, por defecto `gpt-4o-mini`.
+- `MODEL`: modelo que consumirá la API, por defecto `deepseek-chat`.
 
 ## Ejecución
 
@@ -86,7 +85,7 @@ Respuesta esperada:
 
 ```json
 {
-  "model": "gpt-4o-mini",
+  "model": "deepseek-chat",
   "reply": "...",
   "raw": {}
 }
@@ -105,7 +104,7 @@ Respuesta esperada:
 Dependencias principales:
 
 - `express`: servidor HTTP.
-- `axios`: consumo de la API de OpenAI.
+- `axios`: consumo de la API de DeepSeek.
 - `dotenv`: carga de variables de entorno.
 - `lodash`: utilidades de texto usadas en la normalización del prompt.
 
@@ -130,7 +129,7 @@ npm run audit:fix
 ## Estructura
 
 - `src/server.js`: servidor Express y rutas.
-- `src/r1Service.js`: integración con OpenAI.
+- `src/r1Service.js`: integración con DeepSeek.
 - `src/utils.js`: utilidades de normalización.
 - `postman/BotR1-Practice.postman_collection.json`: colección de pruebas.
 - `docs/evidence.md`: guía para registrar la evidencia del proceso.

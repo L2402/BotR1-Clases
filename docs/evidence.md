@@ -20,7 +20,7 @@ Si te piden recrear el proyecto desde cero, estos son los archivos mínimos que 
 {
 	"name": "botr1-node-practice",
 	"version": "1.0.0",
-	"description": "Práctica en Node.js para consultar OpenAI, gestionar dependencias y revisar vulnerabilidades con npm audit.",
+	"description": "Práctica en Node.js para consultar DeepSeek, gestionar dependencias y revisar vulnerabilidades con npm audit.",
 	"main": "src/server.js",
 	"type": "commonjs",
 	"scripts": {
@@ -41,10 +41,9 @@ Si te piden recrear el proyecto desde cero, estos son los archivos mínimos que 
 ### .env.example
 
 ```bash
-OPENAI_API_KEY=tu_clave_aqui
-OPENAI_ORG_ID=
+DEEPSEEK_API_KEY=tu_clave_aqui
 PORT=3000
-MODEL=gpt-4o-mini
+MODEL=deepseek-chat
 ```
 
 ### src/server.js
@@ -95,11 +94,11 @@ app.listen(port, () => {
 const axios = require('axios');
 
 async function sendPromptToR1({ systemPrompt, userPrompt }) {
-	const apiKey = process.env.OPENAI_API_KEY;
-	const model = process.env.MODEL || 'gpt-4o-mini';
+	const apiKey = process.env.DEEPSEEK_API_KEY;
+	const model = process.env.MODEL || 'deepseek-chat';
 
 	if (!apiKey) {
-		const error = new Error('Falta la variable OPENAI_API_KEY en el archivo .env.');
+		const error = new Error('Falta la variable DEEPSEEK_API_KEY en el archivo .env.');
 		error.statusCode = 500;
 		throw error;
 	}
@@ -113,14 +112,13 @@ async function sendPromptToR1({ systemPrompt, userPrompt }) {
 	messages.push({ role: 'user', content: userPrompt });
 
 	const response = await axios.post(
-		'https://api.openai.com/v1/chat/completions',
+		'https://api.deepseek.com/chat/completions',
 		{
 			model,
 			messages,
 			temperature: 0.7
 		},
 		{
-			...(process.env.OPENAI_ORG_ID ? { 'OpenAI-Organization': process.env.OPENAI_ORG_ID } : {}),
 			headers: {
 				Authorization: `Bearer ${apiKey}`,
 				'Content-Type': 'application/json'
