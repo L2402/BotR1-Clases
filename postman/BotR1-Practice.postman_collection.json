@@ -1,0 +1,57 @@
+{
+  "info": {
+    "name": "BotR1 Node Practice",
+    "_postman_id": "b9b0d49e-7d2c-4f8e-a5d6-0a6c8f5e1f11",
+    "description": "Colección para probar la API BotR1 en Node.js.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Chat",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"systemPrompt\": \"Responde de forma breve y clara.\",\n  \"prompt\": \"Explica en una frase qué hace npm audit.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/chat",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chat"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

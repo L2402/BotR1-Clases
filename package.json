@@ -1,0 +1,28 @@
+{
+  "name": "botr1-node-practice",
+  "version": "1.0.0",
+  "description": "Práctica en Node.js para consultar R1/OpenRouter, gestionar dependencias y revisar vulnerabilidades con npm audit.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "audit": "npm audit",
+    "audit:fix": "npm audit fix"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "openrouter",
+    "npm-audit",
+    "postman"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "lodash": "^4.17.21"
+  }
+}
